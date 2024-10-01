@@ -29,85 +29,26 @@ def densify_and_split(grads, grad_threshold, scaling, percent_dense, scene_exten
     #print("Mul; ", percent_dense * scene_extent)
     return selected_pts_mask
 
-
-def generate_sample_data_multiple_ranges_with_opacities(num_samples_per_range, device='cuda'):
-    # Defining multiple mean and standard deviation values for grad, scaling, and opacity
-    # These represent start, mid, and late phases
-
-    grad_stats = [
-        #{'mean': 7.207840098999441e-06, 'std': 3.625786121119745e-05},  # start
-        #{'mean': 3.781244231504388e-05, 'std': 0.00010330345685360953},  # mid
-        #{'mean': 2.1055266188341193e-05, 'std': 6.029089854564518e-05},  # late
-        #{'mean': 2e-4, 'std': 5e-6},  # start
-        #{'mean': 2e-4, 'std': 5e-5},  # start
-        #{'mean': 2e-4, 'std': 5e-4},  # start
-        #{'mean': 2e-8, 'std': 5e-10},  # start
-    ]
-
-    scaling_stats = [
-        #{'mean': 0.0133, 'std': 0.0040},  # start
-        #{'mean': 0.0179, 'std': 0.0072},  # mid
-        #{'mean': 0.0198, 'std': 0.0126},  # late
-        #{'mean': 0.048, 'std': 0.01},  # start
-        #{'mean': 0.048, 'std': 0.01},  # start
-        #{'mean': 0.048, 'std': 0.01},  # start
-        #{'mean': 0.048, 'std': 0.01},  # start
-    ]
-    
-    # Assuming similar ranges for opacities
-    opacity_stats = [
-        {'mean': 0.007, 'std': 0.001},  # start
-        {'mean': 0.007, 'std': 0.001},  # start
-        {'mean': 0.007, 'std': 0.001},  # start
-        #{'mean': 0.007, 'std': 0.001},  # start
-    ]
-
-    all_grads = []
-    all_scalings = []
-    all_opacities = []
-
-    # Sample for each range (start, mid, late)
-    for grad_stat, scaling_stat, opacity_stat in zip(grad_stats, scaling_stats, opacity_stats):
-        #print(grad_stat, scaling_stat, opacity_stat)
-        grads = torch.normal(mean=grad_stat['mean'], std=grad_stat['std'], size=(num_samples_per_range,), device=device)
-        scaling = torch.normal(mean=scaling_stat['mean'], std=scaling_stat['std'], size=(num_samples_per_range,), device=device)
-        opacities = torch.normal(mean=opacity_stat['mean'], std=opacity_stat['std'], size=(num_samples_per_range,), device=device)
-        #print(grads.min(), grads.max())
-        #print("grads: ", grads)
-        all_grads.append(grads)
-        all_scalings.append(scaling)
-        all_opacities.append(opacities)
-
-    # Concatenate all the samples from different phases
-    all_grads = torch.cat(all_grads, dim=0)
-    all_scalings = torch.cat(all_scalings, dim=0)
-    all_opacities = torch.cat(all_opacities, dim=0)
-
-    # Set thresholds and other constants
-    grad_threshold = 0.0002
-    percent_dense = 0.01
-    scene_extent = 4.802176904678345
-    #print("All_grads: ", all_grads)
-
-    return all_grads, all_scalings, all_opacities, grad_threshold, percent_dense, scene_extent
+def densify_and_prune(opacities, min_opacity):
+    # Prune points based on opacity (prune if opacity is less than min_opacity)
+    prune_mask = opacities.squeeze() < min_opacity
+    return prune_mask
 
 
-
-def generate_action_labels(grads, scaling, opacities, grad_threshold, percent_dense, scene_extent):
+def generate_action_labels(grads, scaling, opacities, grad_threshold, percent_dense, scene_extent, min_opacity):
     # Get the maximum scaling value (even though scaling is 1D now, we keep this logic in case it's expanded)
     max_scalings = scaling
 
-    # Create action labels: 0 = do nothing, 1 = split, 2 = clone
+    # Create action labels: 0 = do nothing, 1 = clone, 2 = split, 3 = prune
     clone_mask = densify_and_clone(grads, grad_threshold, max_scalings, percent_dense, scene_extent)
     split_mask = densify_and_split(grads, grad_threshold, max_scalings, percent_dense, scene_extent)
-    #print(clone_mask)
-    #print(split_mask)
+    prune_mask = densify_and_prune(opacities, min_opacity)
 
     action_labels = torch.zeros(grads.size(0), dtype=torch.long, device=grads.device)
     action_labels[split_mask] = 2  # Split
     action_labels[clone_mask] = 1  # Clone
-    #print("Length of action labels: ", len(action_labels))
-    #print(action_labels)
+    action_labels[prune_mask] = 3  # Prune
+    
     return action_labels
 
 
@@ -124,7 +65,7 @@ class ImitationDataset(Dataset):
 
 
 class ParamNetwork(nn.Module):
-    def __init__(self, input_size, hidden_size=16, output_size=3):
+    def __init__(self, input_size, hidden_size=16, output_size=4):
         super(ParamNetwork, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.fc2 = nn.Linear(hidden_size, hidden_size)
@@ -148,6 +89,7 @@ def train_imitation_model(param_network, dataset, epochs=10, batch_size=64, lr=1
 
         for batch_inputs, batch_actions in dataloader:
             optimizer.zero_grad()
+            # ! Why do i not need softmax to make a real decision
             outputs = param_network(batch_inputs)
             loss = criterion(outputs, batch_actions)
             loss.backward()
@@ -166,7 +108,7 @@ def train_imitation_model(param_network, dataset, epochs=10, batch_size=64, lr=1
 
 def get_stats():
     # Path to the text file
-    file_path = '/bigwork/nhmlhuer/gaussian-splatting/grad_and_scaling_4.txt'
+    file_path = '/bigwork/nhmlhuer/gaussian-splatting/grad_and_scaling_and_opacity_2.txt'
 
     # Lists to store the parsed values
     grad_stats = []
@@ -182,9 +124,7 @@ def get_stats():
             # Extract grad and scaling stats
             grad_stats.append({'mean': entry['mean_grad_value'], 'std': entry['std_grad_value']})
             scaling_stats.append({'mean': entry['mean_scaling'], 'std': entry['std_scaling']})
-            
-            # Assuming default opacity values
-            opacity_stats.append({'mean': 0.7, 'std': 0.1})
+            opacity_stats.append({'mean': entry['mean_opacity'], 'std': entry['std_opacity']})
 
     return grad_stats, scaling_stats, opacity_stats
 
@@ -192,7 +132,7 @@ def main():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     # Number of samples per phase (start, mid, late)
-    num_samples_per_range = 10000
+    num_samples_per_range = 20000
     
     grad_stats, scaling_stats, opacity_stats = get_stats()
     #print(grad_stats)
@@ -204,6 +144,7 @@ def main():
     grad_threshold = 0.0002
     percent_dense = 0.01
     scene_extent = 4.802176904678345
+    min_opacity = 0.005  # Opacity threshold for pruning
 
     # Generate samples and action labels for each phase
     for grad_stat, scaling_stat, opacity_stat in zip(grad_stats, scaling_stats, opacity_stats):
@@ -211,17 +152,20 @@ def main():
         grads = torch.normal(mean=grad_stat['mean'], std=grad_stat['std'], size=(num_samples_per_range,), device=device)
         scaling = torch.normal(mean=scaling_stat['mean'], std=scaling_stat['std'], size=(num_samples_per_range,), device=device)
         opacities = torch.normal(mean=opacity_stat['mean'], std=opacity_stat['std'], size=(num_samples_per_range,), device=device)
+        #print("Opactiies: ", opacities)
         #print(grads)
         #print(grads.min(), grads.max())
-        # Generate action labels using the densification functions
-        actions = generate_action_labels(grads, scaling, opacities, grad_threshold, percent_dense, scene_extent)
-
+        # Generate action labels using the densification functions, including pruning
+        actions = generate_action_labels(grads, scaling, opacities, grad_threshold, percent_dense, scene_extent, min_opacity)
+        #print("Actions: ", actions)
         # Concatenate inputs: grads, scaling, and opacities for this phase
         inputs = torch.cat([grads.unsqueeze(-1), scaling.unsqueeze(-1), opacities.unsqueeze(-1)], dim=-1)
 
         # Append to the overall list of inputs and actions
         all_inputs.append(inputs)
         all_actions.append(actions)
+
+        
 
     # Concatenate inputs and actions across all phases
     all_inputs = torch.cat(all_inputs, dim=0)
@@ -233,18 +177,19 @@ def main():
     # Initialize the RL agent (ParamNetwork)
     input_size = all_inputs.shape[1]  # Should be 3
     param_network = ParamNetwork(input_size=3).to(device)
-    if Path("imitation_learning_model.torch").exists():
-        param_network.load_state_dict(torch.load("imitation_learning_model.torch"))
+    model_name = "imitation_learning_with_opacity_model.torch"
+    if Path(model_name).exists():
+        print("Loading pre-trained model...")
+        param_network.load_state_dict(torch.load(model_name))
     # Train the imitation model
     epochs = 10
-    batch_size = 16
+    batch_size = 256
     learning_rate = 1e-3
     train_imitation_model(param_network, dataset, epochs=epochs, batch_size=batch_size, lr=learning_rate)
 
     # Save the trained model's state dict with the specified filename
-    model_save_path = "imitation_learning_model.torch"
-    torch.save(param_network.state_dict(), model_save_path)
-    print(f"Training completed and model saved to {model_save_path}.")
+    torch.save(param_network.state_dict(), model_name)
+    print(f"Training completed and model saved to {model_name}.")
 
 if __name__ == "__main__":
     main()

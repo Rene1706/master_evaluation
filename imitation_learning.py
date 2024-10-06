@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import ast
 from pathlib import Path
+pruning = False
 
 def densify_and_clone(grads, grad_threshold, scaling, percent_dense, scene_extent):
     # Extract points that satisfy the gradient condition for cloning
@@ -42,12 +43,14 @@ def generate_action_labels(grads, scaling, opacities, grad_threshold, percent_de
     # Create action labels: 0 = do nothing, 1 = clone, 2 = split, 3 = prune
     clone_mask = densify_and_clone(grads, grad_threshold, max_scalings, percent_dense, scene_extent)
     split_mask = densify_and_split(grads, grad_threshold, max_scalings, percent_dense, scene_extent)
-    prune_mask = densify_and_prune(opacities, min_opacity)
+    if pruning:
+        prune_mask = densify_and_prune(opacities, min_opacity)
 
     action_labels = torch.zeros(grads.size(0), dtype=torch.long, device=grads.device)
     action_labels[split_mask] = 2  # Split
     action_labels[clone_mask] = 1  # Clone
-    action_labels[prune_mask] = 3  # Prune
+    if pruning:
+        action_labels[prune_mask] = 3  # Prune
     
     return action_labels
 
@@ -132,7 +135,7 @@ def main():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     # Number of samples per phase (start, mid, late)
-    num_samples_per_range = 20000
+    num_samples_per_range = 50000
     
     grad_stats, scaling_stats, opacity_stats = get_stats()
     #print(grad_stats)
@@ -176,13 +179,14 @@ def main():
 
     # Initialize the RL agent (ParamNetwork)
     input_size = all_inputs.shape[1]  # Should be 3
-    param_network = ParamNetwork(input_size=3).to(device)
-    model_name = "imitation_learning_with_opacity_model.torch"
+    output_size = 4 if pruning else 3
+    param_network = ParamNetwork(input_size=3, output_size=output_size).to(device)
+    model_name = "imitation_learning_no_pruning_model_long.torch"
     if Path(model_name).exists():
         print("Loading pre-trained model...")
         param_network.load_state_dict(torch.load(model_name))
     # Train the imitation model
-    epochs = 10
+    epochs = 15
     batch_size = 256
     learning_rate = 1e-3
     train_imitation_model(param_network, dataset, epochs=epochs, batch_size=batch_size, lr=learning_rate)

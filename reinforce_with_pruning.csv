@@ -1,0 +1,51 @@
+subfolder,folder,dataset,gaussian_num_points,results,rl_params.reward_function,rl_params.base_model,rl_params.rl_lr,rl_params.complexity_penalty
+0,20241018_162901,,,,,,,
+1,20241018_162900,,,,,,,
+2,20241018_162900,01Gorilla,15004,"{'ours_30000': {'SSIM': 0.9391469955444336, 'PSNR': 29.934919357299805}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+2,20241018_164020,18Obesobeso,24624,"{'ours_30000': {'SSIM': 0.9495764970779419, 'PSNR': 32.196285247802734}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+2,20241018_165247,19Bear,43619,"{'ours_30000': {'SSIM': 0.9554548859596252, 'PSNR': 32.92771530151367}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+2,20241018_170630,20Puppy,12441,"{'ours_30000': {'SSIM': 0.9549015164375305, 'PSNR': 32.338172912597656}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+3,20241018_164221,18Obesobeso,100003,"{'ours_30000': {'SSIM': 0.9480043649673462, 'PSNR': 31.465715408325195}}",[reward_pareto],not_exisiting,0.005,
+3,20241018_165653,19Bear,100001,"{'ours_30000': {'SSIM': 0.9541164040565491, 'PSNR': 32.34288787841797}}",[reward_pareto],not_exisiting,0.005,
+3,20241018_171140,20Puppy,100002,"{'ours_30000': {'SSIM': 0.9505743980407715, 'PSNR': 30.563180923461914}}",[reward_pareto],not_exisiting,0.005,
+3,20241018_162901,01Gorilla,100002,"{'ours_30000': {'SSIM': 0.9350279569625854, 'PSNR': 28.754240036010742}}",[reward_pareto],not_exisiting,0.005,
+4,20241018_183550,,,,[reward_pareto],not_exisiting,0.001,
+4,20241018_173358,18Obesobeso,5216151,"{'ours_30000': {'SSIM': 0.9317597150802612, 'PSNR': 28.131162643432617}}",[reward_pareto],not_exisiting,0.001,
+4,20241018_162901,01Gorilla,5364448,"{'ours_30000': {'SSIM': 0.8944568037986755, 'PSNR': 23.596050262451172}}",[reward_pareto],not_exisiting,0.001,
+5,20241018_162900,,,,,,,
+6,20241018_162905,,,,,,,
+7,20241018_162920,,,,,,,
+8,20241018_162948,01Gorilla,37777,"{'ours_30000': {'SSIM': 0.9421597719192505, 'PSNR': 30.498207092285156}}",[reward_psnr_normalized_log_num_gauss],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+8,20241018_165444,19Bear,39925,"{'ours_30000': {'SSIM': 0.9560859799385071, 'PSNR': 33.30538558959961}}",[reward_psnr_normalized_log_num_gauss],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+8,20241018_164139,18Obesobeso,25545,"{'ours_30000': {'SSIM': 0.9497955441474915, 'PSNR': 32.30720901489258}}",[reward_psnr_normalized_log_num_gauss],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+8,20241018_170729,20Puppy,32626,"{'ours_30000': {'SSIM': 0.9563230276107788, 'PSNR': 32.892417907714844}}",[reward_psnr_normalized_log_num_gauss],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,
+9,20241018_162957,,,,,,,
+10,20241018_163126,,,,,,,
+11,20241018_163242,,,,,,,
+12,20241018_163243,,,,,,,
+13,20241018_163515,,,,,,,
+14,20241018_163730,,,,,,,
+15,20241018_164047,,,,,,,
+16,20241018_164246,,,,,,,
+17,20241018_164819,,,,,,,
+18,20241018_164847,,,,,,,
+19,20241018_165001,,,,,,,
+20,20241018_173138,19Bear,687551,"{'ours_30000': {'SSIM': 0.957846999168396, 'PSNR': 34.16750717163086}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.005
+20,20241018_171304,18Obesobeso,1108451,"{'ours_30000': {'SSIM': 0.9521713256835938, 'PSNR': 33.28886413574219}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.005
+20,20241018_174325,20Puppy,1082728,"{'ours_30000': {'SSIM': 0.9592455625534058, 'PSNR': 33.903743743896484}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.005
+20,20241018_165024,01Gorilla,1731309,"{'ours_30000': {'SSIM': 0.9468327164649963, 'PSNR': 31.517122268676758}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.005
+21,20241018_165157,,,,,,,
+22,20241018_165304,,,,,,,
+23,20241018_165309,,,,,,,
+24,20241018_165547,,,,,,,
+25,20241018_171245,,,,[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.001,0.001
+25,20241018_170728,19Bear,162164,"{'ours_30000': {'SSIM': 0.9563167691230774, 'PSNR': 33.28738021850586}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.001,0.001
+25,20241018_165654,01Gorilla,182824,"{'ours_30000': {'SSIM': 0.9433916807174683, 'PSNR': 30.681472778320312}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.001,0.001
+25,20241018_170201,18Obesobeso,177694,"{'ours_30000': {'SSIM': 0.9509599804878235, 'PSNR': 32.67247772216797}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.001,0.001
+26,20241018_171135,18Obesobeso,82749,"{'ours_30000': {'SSIM': 0.950085461139679, 'PSNR': 32.36677551269531}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.001
+26,20241018_165822,01Gorilla,79974,"{'ours_30000': {'SSIM': 0.9417077898979187, 'PSNR': 30.339210510253906}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.001
+26,20241018_172537,19Bear,90717,"{'ours_30000': {'SSIM': 0.9557546377182007, 'PSNR': 33.07068634033203}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.001
+26,20241018_173949,,,,[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_with_opacity_model_long.torch,0.0005,0.001
+27,20241018_170112,,,,,,,
+28,20241018_170709,,,,,,,
+29,20241018_170714,,,,,,,

@@ -1,0 +1,82 @@
+subfolder,folder,dataset,gaussian_num_points,results,rl_params.reward_function,rl_params.base_model,rl_params.rl_lr,rl_params.complexity_penalty
+0,20241018_162331,,,,,,,
+1,20241018_162332,,,,,,,
+2,20241018_163327,19Bear,40111,"{'ours_30000': {'SSIM': 0.954376220703125, 'PSNR': 32.427391052246094}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.0005,
+2,20241018_162433,01Gorilla,12396,"{'ours_30000': {'SSIM': 0.9382120370864868, 'PSNR': 29.546688079833984}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.0005,
+2,20241018_163802,20Puppy,39635,"{'ours_30000': {'SSIM': 0.9531909823417664, 'PSNR': 31.302881240844727}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.0005,
+2,20241018_162910,18Obesobeso,22874,"{'ours_30000': {'SSIM': 0.9484764933586121, 'PSNR': 31.723848342895508}}",[reward_pareto],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.0005,
+3,20241018_163000,18Obesobeso,34344,"{'ours_30000': {'SSIM': 0.949018120765686, 'PSNR': 31.723644256591797}}",[reward_pareto],not_exisiting,0.005,
+3,20241018_164151,20Puppy,74965,"{'ours_30000': {'SSIM': 0.9527274966239929, 'PSNR': 31.080278396606445}}",[reward_pareto],not_exisiting,0.005,
+3,20241018_163539,19Bear,78064,"{'ours_30000': {'SSIM': 0.9551581740379333, 'PSNR': 32.652130126953125}}",[reward_pareto],not_exisiting,0.005,
+3,20241018_162432,01Gorilla,16656,"{'ours_30000': {'SSIM': 0.9377323389053345, 'PSNR': 29.298646926879883}}",[reward_pareto],not_exisiting,0.005,
+4,20241018_163026,18Obesobeso,65954,"{'ours_30000': {'SSIM': 0.9504432082176208, 'PSNR': 32.19089126586914}}",[reward_pareto],not_exisiting,0.001,
+4,20241018_163647,19Bear,193756,"{'ours_30000': {'SSIM': 0.9562863707542419, 'PSNR': 33.07456588745117}}",[reward_pareto],not_exisiting,0.001,
+4,20241018_164407,20Puppy,190531,"{'ours_30000': {'SSIM': 0.9556165933609009, 'PSNR': 31.9365291595459}}",[reward_pareto],not_exisiting,0.001,
+4,20241018_162432,01Gorilla,32473,"{'ours_30000': {'SSIM': 0.9413455724716187, 'PSNR': 30.047222137451172}}",[reward_pareto],not_exisiting,0.001,
+5,20241018_170711,20Puppy,252280,"{'ours_30000': {'SSIM': 0.9577968120574951, 'PSNR': 32.785194396972656}}",[reward_pareto],not_exisiting,0.0005,
+5,20241018_162531,01Gorilla,48448,"{'ours_30000': {'SSIM': 0.9436239004135132, 'PSNR': 30.539058685302734}}",[reward_pareto],not_exisiting,0.0005,
+5,20241018_165102,19Bear,258806,"{'ours_30000': {'SSIM': 0.9570629000663757, 'PSNR': 33.41214370727539}}",[reward_pareto],not_exisiting,0.0005,
+5,20241018_163734,18Obesobeso,89704,"{'ours_30000': {'SSIM': 0.9513561129570007, 'PSNR': 32.53855895996094}}",[reward_pareto],not_exisiting,0.0005,
+6,20241018_162531,,,,,,,
+7,20241018_162532,,,,,,,
+8,20241018_162532,,,,,,,
+9,20241018_162531,01Gorilla,11197,"{'ours_30000': {'SSIM': 0.934929370880127, 'PSNR': 28.750185012817383}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.005,
+9,20241018_164153,18Obesobeso,22224,"{'ours_30000': {'SSIM': 0.9478260278701782, 'PSNR': 31.429838180541992}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.005,
+9,20241018_170010,19Bear,39499,"{'ours_30000': {'SSIM': 0.9540908336639404, 'PSNR': 32.331809997558594}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.005,
+9,20241018_171940,20Puppy,37992,"{'ours_30000': {'SSIM': 0.9504449963569641, 'PSNR': 30.538188934326172}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.005,
+10,20241018_162531,01Gorilla,34380,"{'ours_30000': {'SSIM': 0.9426471590995789, 'PSNR': 30.34510612487793}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.001,
+10,20241018_164933,19Bear,178317,"{'ours_30000': {'SSIM': 0.9567896127700806, 'PSNR': 33.28776550292969}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.001,
+10,20241018_163655,18Obesobeso,64874,"{'ours_30000': {'SSIM': 0.9509578347206116, 'PSNR': 32.40875244140625}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.001,
+10,20241018_170427,20Puppy,176263,"{'ours_30000': {'SSIM': 0.9573158025741577, 'PSNR': 32.59001922607422}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.001,
+11,20241018_162532,01Gorilla,67947,"{'ours_30000': {'SSIM': 0.9441385269165039, 'PSNR': 30.60202407836914}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.0005,
+11,20241018_165041,19Bear,479119,"{'ours_30000': {'SSIM': 0.957168698310852, 'PSNR': 33.42884063720703}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.0005,
+11,20241018_170821,20Puppy,409485,"{'ours_30000': {'SSIM': 0.9578633904457092, 'PSNR': 32.799861907958984}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.0005,
+11,20241018_163724,18Obesobeso,126402,"{'ours_30000': {'SSIM': 0.951535701751709, 'PSNR': 32.58889389038086}}",[reward_psnr_normalized_log_num_gauss],not_exisiting,0.0005,
+12,20241018_162531,,,,,,,
+13,20241018_162531,,,,,,,
+14,20241018_162531,,,,,,,
+15,20241018_162531,01Gorilla,11006,"{'ours_30000': {'SSIM': 0.9349048733711243, 'PSNR': 28.752958297729492}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.01
+15,20241018_170203,20Puppy,37918,"{'ours_30000': {'SSIM': 0.9504850506782532, 'PSNR': 30.553499221801758}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.01
+15,20241018_164846,19Bear,39447,"{'ours_30000': {'SSIM': 0.954013466835022, 'PSNR': 32.316734313964844}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.01
+15,20241018_163628,18Obesobeso,22280,"{'ours_30000': {'SSIM': 0.9478248357772827, 'PSNR': 31.43577766418457}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.01
+16,20241018_164923,19Bear,217980,"{'ours_30000': {'SSIM': 0.9564107060432434, 'PSNR': 33.09990310668945}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.01
+16,20241018_162531,01Gorilla,33227,"{'ours_30000': {'SSIM': 0.9416300058364868, 'PSNR': 30.077966690063477}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.01
+16,20241018_170421,20Puppy,201357,"{'ours_30000': {'SSIM': 0.9560179114341736, 'PSNR': 32.102848052978516}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.01
+16,20241018_163653,18Obesobeso,66185,"{'ours_30000': {'SSIM': 0.9505995512008667, 'PSNR': 32.21806716918945}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.01
+17,20241018_164249,18Obesobeso,109596,"{'ours_30000': {'SSIM': 0.9514385461807251, 'PSNR': 32.545841217041016}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.01
+17,20241018_162531,01Gorilla,57672,"{'ours_30000': {'SSIM': 0.9436867237091064, 'PSNR': 30.507204055786133}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.01
+17,20241018_172556,20Puppy,347746,"{'ours_30000': {'SSIM': 0.9577407836914062, 'PSNR': 32.74983215332031}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.01
+17,20241018_170207,19Bear,380861,"{'ours_30000': {'SSIM': 0.9570638537406921, 'PSNR': 33.37546157836914}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.01
+18,20241018_162531,,,,,,,
+19,20241018_163911,18Obesobeso,126901,"{'ours_30000': {'SSIM': 0.9514023065567017, 'PSNR': 32.699859619140625}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.001,0.005
+19,20241018_162531,01Gorilla,116665,"{'ours_30000': {'SSIM': 0.9451087713241577, 'PSNR': 30.817611694335938}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.001,0.005
+19,20241018_165407,19Bear,203564,"{'ours_30000': {'SSIM': 0.9569888710975647, 'PSNR': 33.37440872192383}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.001,0.005
+19,20241018_171055,20Puppy,316752,"{'ours_30000': {'SSIM': 0.9583942890167236, 'PSNR': 33.12076187133789}}",[reward_diff_psnr_relative],/bigwork/nhmlhuer/git/master_evaluation/imitation_learning_no_pruning_model_long.torch,0.001,0.005
+20,20241018_162533,,,,,,,
+21,20241018_162531,01Gorilla,199379,"{'ours_30000': {'SSIM': 0.9455753564834595, 'PSNR': 30.916093826293945}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.005
+21,20241018_164553,18Obesobeso,380430,"{'ours_30000': {'SSIM': 0.9521327614784241, 'PSNR': 32.840362548828125}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.005
+21,20241018_171034,19Bear,1662377,"{'ours_30000': {'SSIM': 0.9576037526130676, 'PSNR': 33.64734649658203}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.005
+21,20241018_175223,20Puppy,1475947,"{'ours_30000': {'SSIM': 0.9585493206977844, 'PSNR': 33.14375686645508}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.005
+22,20241018_162531,01Gorilla,20404,"{'ours_30000': {'SSIM': 0.9394320845603943, 'PSNR': 29.67633628845215}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.005
+22,20241018_163633,18Obesobeso,41282,"{'ours_30000': {'SSIM': 0.9497935771942139, 'PSNR': 31.960521697998047}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.005
+22,20241018_170244,20Puppy,101256,"{'ours_30000': {'SSIM': 0.9544601440429688, 'PSNR': 31.580190658569336}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.005
+22,20241018_164850,19Bear,106379,"{'ours_30000': {'SSIM': 0.9557748436927795, 'PSNR': 32.88060760498047}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.005
+23,20241018_172743,20Puppy,373924,"{'ours_30000': {'SSIM': 0.9563184380531311, 'PSNR': 32.1587028503418}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.005
+23,20241018_162531,01Gorilla,50826,"{'ours_30000': {'SSIM': 0.9424023628234863, 'PSNR': 30.214096069335938}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.005
+23,20241018_170229,19Bear,436571,"{'ours_30000': {'SSIM': 0.9566727876663208, 'PSNR': 33.17759323120117}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.005
+23,20241018_164244,18Obesobeso,105387,"{'ours_30000': {'SSIM': 0.950924813747406, 'PSNR': 32.32677459716797}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.005
+24,20241018_162531,,,,,,,
+25,20241018_162543,,,,,,,
+26,20241018_162539,,,,,,,
+27,20241018_163718,19Bear,39453,"{'ours_30000': {'SSIM': 0.9540720582008362, 'PSNR': 32.32692337036133}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.001
+27,20241018_163109,18Obesobeso,22223,"{'ours_30000': {'SSIM': 0.9479131698608398, 'PSNR': 31.441736221313477}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.001
+27,20241018_162540,01Gorilla,11184,"{'ours_30000': {'SSIM': 0.9349660873413086, 'PSNR': 28.764707565307617}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.001
+27,20241018_164351,20Puppy,37285,"{'ours_30000': {'SSIM': 0.9506722092628479, 'PSNR': 30.652246475219727}}",[reward_diff_psnr_relative],not_exisiting,0.005,0.001
+28,20241018_162745,01Gorilla,145674,"{'ours_30000': {'SSIM': 0.9451081156730652, 'PSNR': 30.780406951904297}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.001
+28,20241018_164118,19Bear,1784187,"{'ours_30000': {'SSIM': 0.9574747681617737, 'PSNR': 33.548274993896484}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.001
+28,20241018_165455,20Puppy,1307457,"{'ours_30000': {'SSIM': 0.9582628607749939, 'PSNR': 32.974830627441406}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.001
+28,20241018_163401,18Obesobeso,260525,"{'ours_30000': {'SSIM': 0.9519387483596802, 'PSNR': 32.71761703491211}}",[reward_diff_psnr_relative],not_exisiting,0.001,0.001
+29,20241018_164016,18Obesobeso,105999,"{'ours_30000': {'SSIM': 0.9512621760368347, 'PSNR': 32.471412658691406}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.001
+29,20241018_162841,01Gorilla,54076,"{'ours_30000': {'SSIM': 0.9433560371398926, 'PSNR': 30.42058753967285}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.001
+29,20241018_171016,20Puppy,346451,"{'ours_30000': {'SSIM': 0.9573067426681519, 'PSNR': 32.56855773925781}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.001
+29,20241018_165331,19Bear,384428,"{'ours_30000': {'SSIM': 0.9570000171661377, 'PSNR': 33.337257385253906}}",[reward_diff_psnr_relative],not_exisiting,0.0005,0.001

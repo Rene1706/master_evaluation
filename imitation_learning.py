@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import ast
 from pathlib import Path
-pruning = False
+pruning = True
 
 def densify_and_clone(grads, grad_threshold, scaling, percent_dense, scene_extent):
     # Extract points that satisfy the gradient condition for cloning
@@ -111,12 +111,13 @@ def train_imitation_model(param_network, dataset, epochs=10, batch_size=64, lr=1
 
 def get_stats():
     # Path to the text file
-    file_path = '/bigwork/nhmlhuer/gaussian-splatting/grad_and_scaling_and_opacity_2.txt'
+    file_path = '/bigwork/nhmlhuer/gaussian-splatting/grad_scaling_opacity_benchmark.txt'
 
     # Lists to store the parsed values
     grad_stats = []
     scaling_stats = []
     opacity_stats = []
+    scene_extent = []
 
     # Read the file and parse each entry
     with open(file_path, 'r') as f:
@@ -128,16 +129,16 @@ def get_stats():
             grad_stats.append({'mean': entry['mean_grad_value'], 'std': entry['std_grad_value']})
             scaling_stats.append({'mean': entry['mean_scaling'], 'std': entry['std_scaling']})
             opacity_stats.append({'mean': entry['mean_opacity'], 'std': entry['std_opacity']})
-
-    return grad_stats, scaling_stats, opacity_stats
+            scene_extent.append(entry['scene_extent'])
+    return grad_stats, scaling_stats, opacity_stats, scene_extent
 
 def main():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     # Number of samples per phase (start, mid, late)
-    num_samples_per_range = 50000
+    num_samples_per_range = 10000
     
-    grad_stats, scaling_stats, opacity_stats = get_stats()
+    grad_stats, scaling_stats, opacity_stats, scene_extents = get_stats()
     #print(grad_stats)
     # Empty lists to collect inputs and action labels
     all_inputs = []
@@ -146,11 +147,11 @@ def main():
     # Set constants for the thresholds
     grad_threshold = 0.0002
     percent_dense = 0.01
-    scene_extent = 4.802176904678345
+    #scene_extent = 4.802176904678345
     min_opacity = 0.005  # Opacity threshold for pruning
 
     # Generate samples and action labels for each phase
-    for grad_stat, scaling_stat, opacity_stat in zip(grad_stats, scaling_stats, opacity_stats):
+    for grad_stat, scaling_stat, opacity_stat, scene_extent in zip(grad_stats, scaling_stats, opacity_stats, scene_extents):
         # Generate grads, scaling, and opacities for the current phase
         grads = torch.normal(mean=grad_stat['mean'], std=grad_stat['std'], size=(num_samples_per_range,), device=device)
         scaling = torch.normal(mean=scaling_stat['mean'], std=scaling_stat['std'], size=(num_samples_per_range,), device=device)
@@ -173,7 +174,7 @@ def main():
     # Concatenate inputs and actions across all phases
     all_inputs = torch.cat(all_inputs, dim=0)
     all_actions = torch.cat(all_actions, dim=0)
-
+    print("Number samples: ", all_actions.shape)
     # Create dataset with inputs (gradients, scaling, opacities) and actions
     dataset = ImitationDataset(all_inputs, all_actions)
 
@@ -181,12 +182,12 @@ def main():
     input_size = all_inputs.shape[1]  # Should be 3
     output_size = 4 if pruning else 3
     param_network = ParamNetwork(input_size=3, output_size=output_size).to(device)
-    model_name = "imitation_learning_no_pruning_model_long.torch"
+    model_name = "imitation_benchmark_agent.torch"
     if Path(model_name).exists():
         print("Loading pre-trained model...")
         param_network.load_state_dict(torch.load(model_name))
     # Train the imitation model
-    epochs = 15
+    epochs = 10
     batch_size = 256
     learning_rate = 1e-3
     train_imitation_model(param_network, dataset, epochs=epochs, batch_size=batch_size, lr=learning_rate)
